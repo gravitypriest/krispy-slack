@@ -53,6 +53,8 @@ rtm.on('message', function (event) {
             }
             if (isNaN(zip)) {
                 rtm.sendMessage('Could not parse ZIP code.', channel);
+            } else if (zip < 10000 || zip > 99999) {
+                rtm.sendMessage('ZIP code must be 5 digits.', channel);
             } else {
                 conf.zip = zip;
                 geocode.loadLatLong(zip, (err, data) => {
